@@ -1,0 +1,120 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { LoginFormData } from "../types";
+import { setLogin } from "../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
+
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<LoginFormData>();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const onSubmit: SubmitHandler<LoginFormData> = async (formData) => {
+    try {
+      setIsSubmitting(true);
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const loggedInUser = await response.json();
+      if (loggedInUser) {
+        dispatch(
+          setLogin({
+            user: loggedInUser.data,
+            token: loggedInUser.token,
+          })
+        );
+        navigate("/");
+        toast.success("Login Successful");
+      }
+    } catch (error) {
+      console.log("Registeration Failed " + error.message);
+      toast.error("Login Failed");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      <Toaster />
+      <div className="hero-bg w-screen h-screen flex items-center justify-center">
+        <div className="container mx-auto flex flex-col md:flex-row">
+          <div className="hidden md:flex w-1/2 bg-cover bg-center">
+            <img
+              src="/images/loginHero.jpg"
+              className="h-full"
+              alt="Background"
+            />
+          </div>
+          <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 py-10">
+            <h1 className="text-primary text-3xl font-bold mb-3">
+              Welcome to Dream Nest
+            </h1>
+            <h2 className="text-xl font-bold mb-6">Sign In to your Account</h2>
+            <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full px-4 py-2 border border-gray-300 rounded"
+                  {...register("email", { required: "Email is required" })}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-xs">{errors.email.message}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="w-full px-4 py-2 border border-gray-300 rounded"
+                  {...register("password", {
+                    required: "Password is Required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <span className="text-red-600 text-xs">
+                    {errors.password.message}
+                  </span>
+                )}
+              </div>
+              <p className="text-sm py-2">
+                Don't have an account ?{" "}
+                <Link
+                  to="/auth/register"
+                  className="font-semibold italic underline">
+                  Sign Up here
+                </Link>
+              </p>
+              <button
+                type="submit"
+                className="btn btn-primary w-full"
+                disabled={isSubmitting}>
+                {isSubmitting && (
+                  <span className="loading loading-spinner loading-md"></span>
+                )}
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default LoginPage;
