@@ -12,7 +12,7 @@ const Categories = () => {
             yourself in the local culture, enjoy the comfort of home, and create unforgettable
             memories in your dream destination.
          </p>
-         <section className="px-3 md:container mx-auto grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-5 place-items-center my-10">
+         <section className="px-3 md:container mx-auto flex gap-5 flex-wrap justify-center  my-10">
             {categories.slice(1, 7).map((category) => {
                return (
                   <CategoryCard

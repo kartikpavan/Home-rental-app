@@ -22,7 +22,7 @@ const CategoryCard = ({ label, Icon, description, img }: Props) => {
    return (
       <Link
          to={`/category/${label}`}
-         className="relative max-w-96 w-full h-80 overflow-hidden rounded-md shadow-lg cursor-pointer	"
+         className="relative max-w-56 w-full h-48 overflow-hidden rounded-md shadow-lg cursor-pointer	"
          onMouseEnter={handleMouseEnter}
          onMouseLeave={handleMouseLeave}>
          <div
