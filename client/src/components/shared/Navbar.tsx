@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { CircleUserRound, Menu, Search, User } from "lucide-react";
 import { RootState, presistor } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import { NavMenuItems } from "../../utils/data";
 
 // temp var
@@ -18,8 +17,8 @@ const Navbar = () => {
    return (
       <nav className="w-full shadow-md fixed bg-white">
          {/* logo */}
-         <div className="px-3 md:container mx-auto py-5 flex items-center justify-between">
-            <Link to="/" className="text-2xl md:text-4xl">
+         <div className="px-3 md:container mx-auto py-3 flex items-center justify-between">
+            <Link to="/" className="text-xl md:text-3xl">
                Dream <span className="text-primary font-bold">NEST</span>
             </Link>
             {/* Search Bar */}
@@ -27,7 +26,7 @@ const Navbar = () => {
                <Search className="absolute top-[50%] left-2 -translate-y-[50%] text-gray-400 " />
                <input
                   type="text"
-                  className="input input-bordered w-80 pl-10 roued-md"
+                  className="input input-bordered input-sm w-80 pl-10 roued-md"
                   placeholder="Search..."
                />
             </div>
@@ -46,12 +45,12 @@ const Navbar = () => {
                         </div>
                         <ul
                            tabIndex={0}
-                           className="dropdown-content z-[1] menu p-2 shadow-md bg-base-100 rounded-lg w-52 mt-4 ">
+                           className="dropdown-content z-[1] menu p-2 shadow-md bg-base-100 rounded-md w-52 mt-4 ">
                            {NavMenuItems.map((item) => {
                               return (
                                  <Link
                                     to={item.href}
-                                    className="w-full py-2 md:text-[16px] text-primary-content  hover:text-primary">
+                                    className="w-full py-2 md:text-[16px] text-primary-content hover:text-primary">
                                     {item.label}
                                  </Link>
                               );
@@ -78,7 +77,7 @@ const Navbar = () => {
                         </div>
                         <ul
                            tabIndex={0}
-                           className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                           className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-md w-52 mt-4">
                            <Link
                               to={"/login"}
                               className="w-full font-semibold py-2 text-primary-content  hover:text-primary ">
