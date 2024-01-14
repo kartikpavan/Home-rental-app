@@ -20,9 +20,9 @@ const UserSchema = new Schema(
       required: true,
     },
     profileImage: {
-      type: String,
-      required: true,
-      default: "",
+      type: Object,
+      url: String,
+      public_id: String,
     },
     myTrips: {
       type: Array,

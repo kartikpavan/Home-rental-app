@@ -1,17 +1,19 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET_KEY,
+  secure: true,
+});
 
 export async function registerController(req, res) {
   try {
     const { firstName, lastName, email, password } = req.body; // req.body will hold the text fields
     const profilePic = req.file; // req.file is the `profilePic` file
-
-    if (!profilePic) {
-      return res.status(400).json({ message: "No File Uploaded" });
-    }
-
-    const imagePath = profilePic.path;
 
     // check if the user exists
     const existingUser = await User.findOne({ email });
@@ -26,13 +28,32 @@ export async function registerController(req, res) {
       lastName,
       email,
       password: hashedPassword,
-      profileImage: imagePath,
     });
+
+    if (!profilePic) {
+      return res.status(400).json({ message: "No File Uploaded" });
+    }
+    const imagePath = profilePic.path;
+    const { secure_url, public_id } = await cloudinary.uploader.upload(
+      imagePath,
+      {
+        gravity: "face",
+        height: 200,
+        width: 200,
+        crop: "thumb",
+      }
+    );
+    newUser.profileImage = {
+      url: secure_url,
+      public_id: public_id,
+    };
+
     // Save user to the db
-    await newUser.save();
+    const savedUser = await newUser.save();
+    console.log("saved user", savedUser);
     return res
       .status(201)
-      .json({ message: "User created successfully", data: newUser });
+      .json({ message: "User created successfully", data: savedUser });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
