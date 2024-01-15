@@ -4,7 +4,6 @@ import { RootState, presistor } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { NavMenuItems } from "../../utils/data";
 
-// temp var
 const Navbar = () => {
    const navigate = useNavigate();
    const user = useSelector((store: RootState) => store.user);
@@ -18,7 +17,7 @@ const Navbar = () => {
       <nav className="w-full shadow-md fixed bg-white">
          {/* logo */}
          <div className="px-3 md:container mx-auto py-3 flex items-center justify-between">
-            <Link to="/" className="text-xl md:text-3xl">
+            <Link to="/" className="text-xl md:text-2xl">
                Dream <span className="text-primary font-bold">HARBOR</span>
             </Link>
             {/* Search Bar */}
@@ -26,7 +25,7 @@ const Navbar = () => {
                <Search className="absolute top-[50%] left-2 -translate-y-[50%] text-gray-400 " />
                <input
                   type="text"
-                  className="input input-bordered input-sm w-80 pl-10 roued-md"
+                  className="input input-bordered input-sm w-80 pl-10 rounded-md"
                   placeholder="Search..."
                />
             </div>
