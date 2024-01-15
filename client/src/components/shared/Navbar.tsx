@@ -19,7 +19,7 @@ const Navbar = () => {
          {/* logo */}
          <div className="px-3 md:container mx-auto py-3 flex items-center justify-between">
             <Link to="/" className="text-xl md:text-3xl">
-               Dream <span className="text-primary font-bold">NEST</span>
+               Dream <span className="text-primary font-bold">HARBOR</span>
             </Link>
             {/* Search Bar */}
             <div className="relative hidden md:flex ">

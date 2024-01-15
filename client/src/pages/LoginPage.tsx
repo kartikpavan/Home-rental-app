@@ -55,7 +55,7 @@ const LoginPage = () => {
                   <img src="/images/loginHero.jpg" className="h-full" alt="Background" />
                </div>
                <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 py-10">
-                  <h1 className="text-primary text-3xl font-bold mb-3">Welcome to Dream Nest</h1>
+                  <h1 className="text-primary text-3xl font-bold mb-3">Welcome to Dream HARBOR</h1>
                   <h2 className="text-xl font-bold mb-6">Sign In to your Account</h2>
                   <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
                      <div className="mb-4">

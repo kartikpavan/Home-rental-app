@@ -32,13 +32,10 @@ const RegisterPage = () => {
          formData.append("email", data.email);
          formData.append("password", data.password);
          formData.append("profilePic", data.profilePic[0]);
-         const response = await fetch(
-            "http://localhost:5000/api/auth/register",
-            {
-               method: "POST",
-               body: formData,
-            }
-         );
+         const response = await fetch("http://localhost:5000/api/auth/register", {
+            method: "POST",
+            body: formData,
+         });
          if (response.ok) {
             console.log("Registered successfully!");
             navigate("/login", { replace: true });
@@ -62,16 +59,10 @@ const RegisterPage = () => {
          <div className="hero-bg w-screen h-screen flex items-center justify-center">
             <div className="container mx-auto flex flex-col md:flex-row">
                <div className="hidden md:flex w-1/2 bg-cover bg-center">
-                  <img
-                     src="/images/login.png"
-                     className="h-full"
-                     alt="Background"
-                  />
+                  <img src="/images/login.png" className="h-full" alt="Background" />
                </div>
                <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 py-10">
-                  <h1 className="text-primary text-3xl font-bold mb-3">
-                     Welcome to Dream Nest
-                  </h1>
+                  <h1 className="text-primary text-3xl font-bold mb-3">Welcome to Dream HARBOR</h1>
                   <h2 className="text-xl font-bold mb-6">Create an Account</h2>
                   <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                      <div className="mb-4">
@@ -83,20 +74,16 @@ const RegisterPage = () => {
                               required: "First Name is Required",
                               minLength: {
                                  value: 1,
-                                 message:
-                                    "First Name must be at least 1 characters",
+                                 message: "First Name must be at least 1 characters",
                               },
                               maxLength: {
                                  value: 20,
-                                 message:
-                                    "First Name must be less than 20 characters",
+                                 message: "First Name must be less than 20 characters",
                               },
                            })}
                         />
                         {errors.firstName && (
-                           <span className="text-red-600 text-xs">
-                              {errors.firstName.message}
-                           </span>
+                           <span className="text-red-600 text-xs">{errors.firstName.message}</span>
                         )}
                      </div>
                      <div className="mb-4 ">
@@ -108,20 +95,16 @@ const RegisterPage = () => {
                               required: "Last Name is Required",
                               minLength: {
                                  value: 1,
-                                 message:
-                                    "Last Name must be at least 1 characters",
+                                 message: "Last Name must be at least 1 characters",
                               },
                               maxLength: {
                                  value: 20,
-                                 message:
-                                    "Last Name must be less than 0 characters",
+                                 message: "Last Name must be less than 0 characters",
                               },
                            })}
                         />
                         {errors.lastName && (
-                           <span className="text-red-600 text-sm ">
-                              {errors.lastName.message}
-                           </span>
+                           <span className="text-red-600 text-sm ">{errors.lastName.message}</span>
                         )}
                      </div>
                      <div className=" mb-4 ">
@@ -134,9 +117,7 @@ const RegisterPage = () => {
                            })}
                         />
                         {errors.email && (
-                           <span className="text-red-600 text-xs">
-                              {errors.email.message}
-                           </span>
+                           <span className="text-red-600 text-xs">{errors.email.message}</span>
                         )}
                      </div>
                      <div className=" mb-4 ">
@@ -148,15 +129,12 @@ const RegisterPage = () => {
                               required: "Password is Required",
                               minLength: {
                                  value: 6,
-                                 message:
-                                    "Password must be at least 6 characters",
+                                 message: "Password must be at least 6 characters",
                               },
                            })}
                         />
                         {errors.password && (
-                           <span className="text-red-600 text-xs">
-                              {errors.password.message}
-                           </span>
+                           <span className="text-red-600 text-xs">{errors.password.message}</span>
                         )}
                      </div>
                      <div className=" mb-4 ">
@@ -189,16 +167,12 @@ const RegisterPage = () => {
                            })}
                         />
                         {errors.profilePic && (
-                           <span className="text-red-600 text-xs">
-                              {errors.profilePic.message}
-                           </span>
+                           <span className="text-red-600 text-xs">{errors.profilePic.message}</span>
                         )}
                      </div>
                      <p className="text-sm py-2">
                         Already have an account ?{" "}
-                        <Link
-                           to="/login"
-                           className="font-semibold italic underline">
+                        <Link to="/login" className="font-semibold italic underline">
                            Sign In here
                         </Link>
                      </p>
