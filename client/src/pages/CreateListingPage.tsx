@@ -5,6 +5,8 @@ import { Trash, UploadCloud } from "lucide-react";
 import CartBtn from "../components/createListingLocalComponents/CartBtn";
 import { CreateListingFormData } from "../types";
 import ListingCategories from "../components/createListingLocalComponents/ListingCategories";
+import ListingAccomodation from "../components/createListingLocalComponents/ListingAccomodation";
+import ListingFacilities from "../components/createListingLocalComponents/ListingFacilities";
 
 const CreateListingPage = () => {
    const {
@@ -38,9 +40,21 @@ const CreateListingPage = () => {
    // Select Category
    const selectedCategories = watch("categories", []);
    const handleCategorySelection = (category: string) => {
-      const updatedCategories = selectedCategories.includes(category)
-         ? selectedCategories.filter((cat) => cat !== category)
-         : [...selectedCategories, category];
+      let updatedCategories: string[];
+      if (category === "All") {
+         updatedCategories =
+            selectedCategories.length === categories.length
+               ? []
+               : categories.map((cat) => cat.label);
+      } else {
+         updatedCategories = selectedCategories.includes(category)
+            ? selectedCategories.filter((cat) => cat !== category)
+            : [...selectedCategories, category];
+         if (updatedCategories.length !== categories.length) {
+            updatedCategories = updatedCategories.filter((cat) => cat !== "All");
+         }
+      }
+
       setValue("categories", updatedCategories);
    };
 
@@ -119,25 +133,6 @@ const CreateListingPage = () => {
                   {errors.categories && (
                      <span className="text-red-500">{errors.categories.message}</span>
                   )}
-                  {/* <div className="flex flex-wrap gap-x-6 gap-y-12 pt-5 justify-center md:px-20">
-                     {categories.map((category) => {
-                        const { label, icon: Icon } = category;
-                        const isSelected = selectedCategories.includes(label);
-                        return (
-                           <div
-                              onClick={() => handleCategorySelection(label)}
-                              key={label}
-                              className={`w-full max-w-32 h-24 rounded-md shadow-md border ${
-                                 isSelected
-                                    ? "border-blue-500 border-2 bg-blue-50"
-                                    : "border-gray-300"
-                              } p-5 grid place-items-center gap-3`}>
-                              <Icon />
-                              <p className="text-sm text-center">{label}</p>
-                           </div>
-                        );
-                     })}
-                  </div> */}
                   <ListingCategories
                      categories={categories}
                      selectedCategories={selectedCategories}
@@ -152,26 +147,12 @@ const CreateListingPage = () => {
                   {errors.accomodation && (
                      <span className=" text-red-500">{errors.accomodation.message}</span>
                   )}
-                  <div className="space-y-5 md:px-20 pt-10">
-                     {placeTypes.map((item) => {
-                        const { name, value, description, icon: Icon } = item;
-                        const isSelected = selectedAccomodation === value;
-                        return (
-                           <div
-                              key={name}
-                              onClick={() => handleAccomodationSelection(value)}
-                              className={`cursor-pointer w-full shadow-md rounded-md flex border items-center justify-between p-5 ${
-                                 isSelected ? "border-blue-500 border-2 bg-blue-50" : ""
-                              }`}>
-                              <div className="flex flex-col gap-5">
-                                 <p className="font-semibold">{name}</p>
-                                 <p className="text-sm">{description}</p>
-                              </div>
-                              <Icon className="hidden sm:flex" />
-                           </div>
-                        );
-                     })}
-                  </div>
+
+                  <ListingAccomodation
+                     placeTypes={placeTypes}
+                     selectedAccomodation={selectedAccomodation}
+                     handleClick={handleAccomodationSelection}
+                  />
                </article>
                {/* Place Details */}
                <article className="pt-10">
@@ -463,25 +444,12 @@ const CreateListingPage = () => {
                   {errors.facilities && (
                      <span className="text-red-500">{errors.facilities.message}</span>
                   )}
-                  <div className="md:px-20 pt-10 flex flex-wrap justify-center gap-5">
-                     {facilities.map((item) => {
-                        const { name, value, icon: Icon } = item;
-                        const isSelected = selectedFacilities.includes(value);
-                        return (
-                           <div
-                              key={name}
-                              onClick={() => handleFacilitySelection(value)}
-                              className={`max-w-52 w-full flex flex-col items-center justify-center gap-2 p-5 rounded-md shadow-md border ${
-                                 isSelected
-                                    ? "border-blue-500 border-2 bg-blue-50"
-                                    : "border-gray-300"
-                              }`}>
-                              <Icon />
-                              <p className="text-center">{name}</p>
-                           </div>
-                        );
-                     })}
-                  </div>
+
+                  <ListingFacilities
+                     facilities={facilities}
+                     selectedFacilities={selectedFacilities}
+                     handleClick={handleFacilitySelection}
+                  />
                </article>
                <article className="pt-10">
                   <h2 className="font-semibold text-lg text-primary-content">
