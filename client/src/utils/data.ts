@@ -86,7 +86,7 @@ export const categories = [
    },
    {
       img: "/images/city.jpg",
-      label: "Iconic cities",
+      label: "Cities",
       icon: Warehouse,
       description: "This property is modern!",
    },
@@ -116,7 +116,7 @@ export const categories = [
    },
    {
       img: "assets/skiing_cat.jpg",
-      label: "Ski-in/out",
+      label: "Skiing",
       icon: CableCar,
       description: "This property has skiing activies!",
    },
@@ -166,23 +166,21 @@ export const categories = [
 
 export const placeTypes = [
    {
-      name: "An entire place",
+      name: "Entire place",
       value: "place",
       description: "Guests have the whole place to themselves",
       icon: Home,
    },
    {
-      name: "Room(s)",
+      name: "Separate Room(s)",
       value: "rooms",
-      description:
-         "Guests have their own room in a house, plus access to shared places",
+      description: "Guests have their own room in a house, plus access to shared places",
       icon: DoorClosed,
    },
    {
-      name: "A Shared Room",
+      name: "Single Room",
       value: "single-room",
-      description:
-         "Guests sleep in a room or common area that maybe shared with you or others",
+      description: "Guests sleep in a room or common area that maybe shared with you or others",
       icon: Users,
    },
 ];
@@ -190,97 +188,117 @@ export const placeTypes = [
 export const facilities = [
    {
       name: "Bath tub",
+      value: "BathTub",
       icon: Bath,
    },
    {
       name: "Personal care products",
+      value: "PersonalCareProducts",
       icon: Beaker,
    },
    {
       name: "Outdoor shower",
+      value: "OutdoorShower",
       icon: ShowerHead,
    },
    {
       name: "Washer",
+      value: "Washer",
       icon: WashingMachine,
    },
    {
       name: "Hangers",
+      value: "Hangers",
       icon: CandlestickChart,
    },
    {
       name: "Iron",
+      value: "Iron",
       icon: Anvil,
    },
    {
       name: "TV",
+      value: "TV",
       icon: Tv,
    },
    {
       name: "Dedicated workspace",
+      value: "DedicatedWorkspace",
       icon: Briefcase,
    },
    {
       name: "Air Conditioning",
+      value: "AirConditioning",
       icon: AirVent,
    },
    {
       name: "Heating",
+      value: "Heating",
       icon: Heater,
    },
    {
       name: "Security cameras",
+      value: "SecurityCameras",
       icon: Cctv,
    },
    {
       name: "Fire extinguisher",
+      value: "FireExtinguisher",
       icon: AlarmSmoke,
    },
    {
       name: "First Aid",
+      value: "FirstAid",
       icon: Cross,
    },
    {
       name: "Wifi",
+      value: "Wifi",
       icon: Wifi,
    },
    {
       name: "Cooking set",
+      value: "CookingSet",
       icon: CookingPot,
    },
    {
       name: "Refrigerator",
+      value: "Refrigerator",
       icon: Refrigerator,
    },
    {
       name: "Microwave",
+      value: "Microwave",
       icon: Microwave,
    },
-
    {
       name: "Barbecue grill",
+      value: "BarbecueGrill",
       icon: Beef,
    },
    {
       name: "Outdoor dining area",
+      value: "OutdoorDiningArea",
       icon: Umbrella,
    },
-
    {
       name: "Camp fire",
+      value: "CampFire",
       icon: FlameKindling,
    },
    {
       name: "Garden",
+      value: "Garden",
       icon: Fence,
    },
    {
       name: "Free parking",
+      value: "FreeParking",
       icon: ParkingCircle,
    },
-
    {
-      name: " Pet allowed",
+      name: "Pet allowed",
+      value: "PetAllowed",
       icon: PawPrint,
    },
 ];
