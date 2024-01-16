@@ -1,22 +1,48 @@
 import {
+   AirVent,
+   AlarmSmoke,
+   Anvil,
+   Bath,
+   Beaker,
+   Beef,
+   Briefcase,
    CableCar,
+   CandlestickChart,
    Castle,
+   Cctv,
+   CookingPot,
+   Cross,
    Cuboid,
+   DoorClosed,
    Fan,
+   Fence,
+   FlameKindling,
    Gem,
    Globe,
-   LucideIcon,
+   Heater,
+   Home,
+   Microwave,
    Mountain,
    Palmtree,
+   ParkingCircle,
+   PawPrint,
+   Refrigerator,
    Sailboat,
    Shell,
+   ShowerHead,
    Snail,
    Snowflake,
    TreePine,
+   Tv,
+   Umbrella,
+   Users,
    Warehouse,
+   WashingMachine,
    Waves,
+   Wifi,
    Wind,
 } from "lucide-react";
+import { ToastBar } from "react-hot-toast";
 
 export const NavMenuItems = [
    {
@@ -72,7 +98,7 @@ export const categories = [
    },
    {
       img: "/images/pool.jpg",
-      label: "Amazing Pools",
+      label: " Pools",
       icon: Waves,
       description: "This is property has a beautiful pool!",
    },
@@ -135,5 +161,126 @@ export const categories = [
       label: "Luxury",
       icon: Gem,
       description: "This property is brand new and luxurious!",
+   },
+];
+
+export const placeTypes = [
+   {
+      name: "An entire place",
+      value: "place",
+      description: "Guests have the whole place to themselves",
+      icon: Home,
+   },
+   {
+      name: "Room(s)",
+      value: "rooms",
+      description:
+         "Guests have their own room in a house, plus access to shared places",
+      icon: DoorClosed,
+   },
+   {
+      name: "A Shared Room",
+      value: "single-room",
+      description:
+         "Guests sleep in a room or common area that maybe shared with you or others",
+      icon: Users,
+   },
+];
+
+export const facilities = [
+   {
+      name: "Bath tub",
+      icon: Bath,
+   },
+   {
+      name: "Personal care products",
+      icon: Beaker,
+   },
+   {
+      name: "Outdoor shower",
+      icon: ShowerHead,
+   },
+   {
+      name: "Washer",
+      icon: WashingMachine,
+   },
+   {
+      name: "Hangers",
+      icon: CandlestickChart,
+   },
+   {
+      name: "Iron",
+      icon: Anvil,
+   },
+   {
+      name: "TV",
+      icon: Tv,
+   },
+   {
+      name: "Dedicated workspace",
+      icon: Briefcase,
+   },
+   {
+      name: "Air Conditioning",
+      icon: AirVent,
+   },
+   {
+      name: "Heating",
+      icon: Heater,
+   },
+   {
+      name: "Security cameras",
+      icon: Cctv,
+   },
+   {
+      name: "Fire extinguisher",
+      icon: AlarmSmoke,
+   },
+   {
+      name: "First Aid",
+      icon: Cross,
+   },
+   {
+      name: "Wifi",
+      icon: Wifi,
+   },
+   {
+      name: "Cooking set",
+      icon: CookingPot,
+   },
+   {
+      name: "Refrigerator",
+      icon: Refrigerator,
+   },
+   {
+      name: "Microwave",
+      icon: Microwave,
+   },
+
+   {
+      name: "Barbecue grill",
+      icon: Beef,
+   },
+   {
+      name: "Outdoor dining area",
+      icon: Umbrella,
+   },
+
+   {
+      name: "Camp fire",
+      icon: FlameKindling,
+   },
+   {
+      name: "Garden",
+      icon: Fence,
+   },
+   {
+      name: "Free parking",
+      icon: ParkingCircle,
+   },
+
+   {
+      name: " Pet allowed",
+      icon: PawPrint,
    },
 ];
