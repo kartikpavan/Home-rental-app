@@ -12,25 +12,27 @@ export type LoginFormData = {
    password: string;
 };
 
-export type UserState = {
-   user: {
-      _id: string;
-      firstName: string;
-      lastName: string;
-      email: string;
-      password: string;
-      myTrips?: any[];
-      myProperties?: any[];
-      myReservations?: any[];
-      wishList?: any[];
-      createdAt: string;
-      updatedAt: string;
-      __v?: number;
-      profileImage: {
-         url: string;
-         public_id: string;
-      };
+export type User = {
+   _id: string;
+   firstName: string;
+   lastName: string;
+   email: string;
+   password: string;
+   myTrips?: any[];
+   myProperties?: any[];
+   myReservations?: any[];
+   wishList?: any[];
+   createdAt: string;
+   updatedAt: string;
+   __v?: number;
+   profileImage: {
+      url: string;
+      public_id: string;
    };
+};
+
+export type UserState = {
+   user: User;
    token: string | null;
 };
 
@@ -52,4 +54,30 @@ export type CreateListingFormData = {
    bedrooms: number;
    beds: number;
    bathrooms: number;
+};
+
+export type Listing = {
+   categories: string[];
+   accomodation: string;
+   price: number;
+   title: string;
+   description: string;
+   highlight: string;
+   streetAddress: string;
+   apartmentSuite: string;
+   city: string;
+   country: string;
+   pinCode: string;
+   facilities: string[];
+   images: Array<{
+      url: string;
+      public_id: string;
+   }>;
+   guests: string;
+   bedrooms: string;
+   beds: string;
+   bathrooms: string;
+   createdAt?: Date;
+   updatedAt?: Date;
+   author: User;
 };

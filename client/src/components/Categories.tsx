@@ -3,7 +3,7 @@ import CategoryCard from "./shared/CategoryCard";
 
 const Categories = () => {
    return (
-      <div className="">
+      <div>
          <h1 className="text-3xl font-bold text-primary-content text-center my-10 ">
             Explore Top Categories
          </h1>

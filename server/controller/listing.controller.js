@@ -57,9 +57,10 @@ export async function createListingController(req, res) {
       const uploadedImages = [];
       for (let image of images) {
          const { secure_url, public_id } = await cloudinary.uploader.upload(image.path, {
-            height: 100,
-            width: 100,
-            quality: "auto:low", // Specify the desired compression level
+            transformation: [
+               { width: 800, height: 600, crop: "limit" }, // Resize the image to a maximum of 800x600 pixels
+               { format: "auto", quality: "auto" }, // Automatically choose the optimal format and quality
+            ],
          });
          uploadedImages.push({
             url: secure_url,

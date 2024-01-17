@@ -6,7 +6,7 @@ import { NavMenuItems } from "../../utils/data";
 
 const Navbar = () => {
    const navigate = useNavigate();
-   const user = useSelector((store: RootState) => store.user);
+   const { user } = useSelector((store: RootState) => store.user);
 
    // LOGOUT USER and clear the redux persist state
    const handleLogout = () => {
@@ -14,7 +14,7 @@ const Navbar = () => {
       navigate("/login");
    };
    return (
-      <nav className="w-full shadow-md fixed bg-white">
+      <nav className="w-full shadow-md fixed bg-white z-10">
          {/* logo */}
          <div className="px-3 md:container mx-auto py-3 flex items-center justify-between">
             <Link to="/" className="text-xl md:text-2xl">
@@ -62,9 +62,9 @@ const Navbar = () => {
                         </ul>
                      </div>
                      <img
-                        src={user.profileImage.url}
+                        src={user.profileImage?.url}
                         alt="ProfilePic"
-                        className="object-contain w-8 h-8 rounded-full hover:cursor-pointer"
+                        className="object-contai   n w-8 h-8 rounded-full hover:cursor-pointer"
                      />
                   </div>
                ) : (

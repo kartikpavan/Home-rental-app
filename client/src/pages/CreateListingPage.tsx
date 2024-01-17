@@ -41,7 +41,7 @@ const CreateListingPage = () => {
          bathrooms: 1,
       },
    });
-   const { _id: authorId } = useSelector((store: RootState) => store.user);
+   const { user } = useSelector((store: RootState) => store.user);
    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
    // Select Category
@@ -102,7 +102,7 @@ const CreateListingPage = () => {
       try {
          setIsSubmitting(true);
          const listingFormData = new FormData();
-         listingFormData.append("authorId", authorId);
+         listingFormData.append("author", user._id);
          listingFormData.append("accomodation", data.accomodation);
          listingFormData.append("price", data.price.toString());
          listingFormData.append("title", data.title);
@@ -222,7 +222,6 @@ const CreateListingPage = () => {
                            <label htmlFor="price" className="font-semibold">
                               Price (₹)
                            </label>
-
                            <input
                               className="w-full px-4 py-2 border border-gray-300 rounded shadow-md"
                               type="number"
@@ -281,7 +280,7 @@ const CreateListingPage = () => {
                                     message: "description must be at least 1 character",
                                  },
                                  maxLength: {
-                                    value: 100,
+                                    value: 250,
                                     message: "description cannot exceed 250 characters",
                                  },
                               })}
@@ -307,7 +306,7 @@ const CreateListingPage = () => {
                                     message: "highlight must be at least 1 character",
                                  },
                                  maxLength: {
-                                    value: 100,
+                                    value: 250,
                                     message: "highlight cannot exceed 150 characters",
                                  },
                               })}

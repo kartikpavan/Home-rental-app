@@ -5,6 +5,7 @@ const ListingSchema = new Schema(
       author: {
          type: Schema.Types.ObjectId,
          ref: "User",
+         required: true,
       },
       categories: {
          type: [String],
