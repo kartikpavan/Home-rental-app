@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginFormData } from "../types";
 import { setLogin } from "../redux/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
@@ -13,6 +13,7 @@ const LoginPage = () => {
       register,
       handleSubmit,
       watch,
+      setError,
       formState: { errors },
    } = useForm<LoginFormData>();
    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -25,6 +26,11 @@ const LoginPage = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
          });
+         if (response.status === 404) {
+            setError("email", {
+               message: "User not found",
+            });
+         }
          const loggedInUser = await response.json();
          if (loggedInUser.message === "Invalid credentials") {
             toast.error("Invalid Credentials");

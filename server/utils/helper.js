@@ -1,12 +1,12 @@
 import multer from "multer";
+const storage = multer.diskStorage({});
 
-const storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, "public/uploads/"); // store uplaoded file in the upload folder
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.originalname);
-  },
-});
+// control which image file type to upload
+const imageFileFilter = (req, file, cb) => {
+   if (!file.mimetype.startsWith("image")) {
+      cb("Only image Files are supported", false);
+   }
+   cb(null, true);
+};
 
-export const upload = multer({ storage: storage });
+export const upload = multer({ storage, fileFilter: imageFileFilter });

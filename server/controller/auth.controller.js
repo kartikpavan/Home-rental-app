@@ -13,7 +13,6 @@ cloudinary.config({
 export async function registerController(req, res) {
    try {
       const { firstName, lastName, email, password } = req.body; // req.body will hold the text fields
-
       // check if the user exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
