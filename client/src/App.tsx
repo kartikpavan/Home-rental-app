@@ -9,27 +9,21 @@ import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 
 const App = () => {
-   const { token } = useSelector((store: RootState) => store.user);
-   return (
-      <>
-         <Navbar />
-         <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route
-               path="/create-listing"
-               element={!token ? <LoginPage /> : <CreateListingPage />}
-            />
-            <Route path="/listing/:id" element={<ListingDetailPage />} />
-            <Route
-               path="/auth/*"
-               element={<h1 className="pt-40">This route does not exist yet</h1>}
-            />
-            <Route path="/*" element={<h1 className="pt-40">This route does not exist yet</h1>} />
-         </Routes>
-      </>
-   );
+  const { token } = useSelector((store: RootState) => store.user);
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/create-listing" element={!token ? <LoginPage /> : <CreateListingPage />} />
+        <Route path="/listing/:id" element={<ListingDetailPage />} />
+        <Route path="/auth/*" element={<h1 className="pt-40">This route does not exist yet</h1>} />
+        <Route path="/*" element={<h1 className="pt-40">This route does not exist yet</h1>} />
+      </Routes>
+    </>
+  );
 };
 
 export default App;

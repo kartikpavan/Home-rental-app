@@ -14,9 +14,9 @@ dependencies:
   react:
     specifier: ^18.2.0
     version: 18.2.0
-  react-beautiful-dnd:
-    specifier: ^13.1.1
-    version: 13.1.1(react-dom@18.2.0)(react@18.2.0)
+  react-date-range:
+    specifier: 2.0.0-alpha.4
+    version: 2.0.0-alpha.4(date-fns@3.2.0)(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -274,6 +274,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
+    dev: true
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -758,6 +759,7 @@ packages:
     dependencies:
       '@types/react': 18.2.47
       hoist-non-react-statics: 3.3.2
+    dev: true
 
   /@types/prop-types@15.7.11:
     resolution: {integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==}
@@ -781,6 +783,7 @@ packages:
       '@types/react': 18.2.47
       hoist-non-react-statics: 3.3.2
       redux: 4.2.1
+    dev: true
 
   /@types/react-router-dom@5.3.3:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
@@ -954,6 +957,10 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
+    dev: false
+
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -993,12 +1000,6 @@ packages:
       which: 2.0.2
     dev: true
 
-  /css-box-model@1.2.1:
-    resolution: {integrity: sha512-a7Vr4Q/kd/aw96bnJG332W9V9LkJO69JRcaCYDUqjp6/z0w6VcZjgAcTbgFxEPfBgdnAwlh3iwu+hLopa+flJw==}
-    dependencies:
-      tiny-invariant: 1.3.1
-    dev: false
-
   /css-selector-tokenizer@0.8.0:
     resolution: {integrity: sha512-Jd6Ig3/pe62/qe5SBPTN8h8LeUg/pT4lLgtavPf7updwwHpvFzxvOQBHYj2LZDMjUnBzgvIUSjRcf6oT5HzHFg==}
     dependencies:
@@ -1031,6 +1032,10 @@ packages:
     transitivePeerDependencies:
       - postcss
     dev: true
+
+  /date-fns@3.2.0:
+    resolution: {integrity: sha512-E4KWKavANzeuusPi0jUjpuI22SURAznGkx7eZV+4i6x2A+IZxAMcajgkvuDAU1bg40+xuhW1zRdVIIM/4khuIg==}
+    dev: false
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -1221,6 +1226,7 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: true
 
   /immer@10.0.3:
     resolution: {integrity: sha512-pwupu3eWfouuaowscykeckFmVTpqbzW+rXFCX8rQLkZzM9ftBmU/++Ra+o+L27mz03zJTlyV4UUr+fdKNffo4A==}
@@ -1332,10 +1338,6 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
-    dev: false
-
-  /memoize-one@5.2.1:
-    resolution: {integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==}
     dev: false
 
   /merge2@1.4.1:
@@ -1522,27 +1524,18 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /raf-schd@4.0.3:
-    resolution: {integrity: sha512-tQkJl2GRWh83ui2DiPTJz9wEiMN20syf+5oKfB03yYP7ioZcJwsIK8FjrtLwH1m7C7e+Tt2yYBlrOpdT+dyeIQ==}
-    dev: false
-
-  /react-beautiful-dnd@13.1.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-0Lvs4tq2VcrEjEgDXHjT98r+63drkKEgqyxdA7qD3mvKwga6a5SscbdLPO2IExotU1jW8L0Ksdl0Cj2AF67nPQ==}
+  /react-date-range@2.0.0-alpha.4(date-fns@3.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-8IP6DVW6nGQu1PUUw7iCAOnRfLP8cKrjDNKZFb9z7SAWUZ/RiUYNbUfdZxGySlcx5V52BpgFpEuAKD16pEN+MA==}
     peerDependencies:
-      react: ^16.8.5 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.5 || ^17.0.0 || ^18.0.0
+      date-fns: 3.0.6 || >=3.0.0
+      react: ^0.14 || ^15.0.0-rc || >=15.0
     dependencies:
-      '@babel/runtime': 7.23.8
-      css-box-model: 1.2.1
-      memoize-one: 5.2.1
-      raf-schd: 4.0.3
+      classnames: 2.5.1
+      date-fns: 3.2.0
+      prop-types: 15.8.1
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-redux: 7.2.9(react-dom@18.2.0)(react@18.2.0)
-      redux: 4.2.1
-      use-memo-one: 1.1.3(react@18.2.0)
-    transitivePeerDependencies:
-      - react-native
+      react-list: 0.8.17(react@18.2.0)
+      shallow-equal: 1.2.1
     dev: false
 
   /react-dom@18.2.0(react@18.2.0):
@@ -1581,30 +1574,13 @@ packages:
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  /react-is@17.0.2:
-    resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
-    dev: false
-
-  /react-redux@7.2.9(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Gx4L3uM182jEEayZfRbI/G11ZpYdNAnBs70lFVMNdHJI76XYtR+7m0MN+eAs7UHBPhWXcnFPaS+9owSCJQHNpQ==}
+  /react-list@0.8.17(react@18.2.0):
+    resolution: {integrity: sha512-pgmzGi0G5uGrdHzMhgO7KR1wx5ZXVvI3SsJUmkblSAKtewIhMwbQiMuQiTE83ozo04BQJbe0r3WIWzSO0dR1xg==}
     peerDependencies:
-      react: ^16.8.3 || ^17 || ^18
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
+      react: 0.14 || 15 - 18
     dependencies:
-      '@babel/runtime': 7.23.8
-      '@types/react-redux': 7.1.33
-      hoist-non-react-statics: 3.3.2
-      loose-envify: 1.4.0
       prop-types: 15.8.1
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-is: 17.0.2
     dev: false
 
   /react-redux@9.1.0(@types/react@18.2.47)(react@18.2.0)(redux@5.0.1):
@@ -1702,6 +1678,7 @@ packages:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
       '@babel/runtime': 7.23.8
+    dev: true
 
   /redux@5.0.1:
     resolution: {integrity: sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==}
@@ -1709,6 +1686,7 @@ packages:
 
   /regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
+    dev: true
 
   /reselect@5.1.0:
     resolution: {integrity: sha512-aw7jcGLDpSgNDyWBQLv2cedml85qd95/iszJjN988zX1t7AVRJi19d9kto5+W7oCfQ94gyo40dVbT6g2k4/kXg==}
@@ -1767,6 +1745,10 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
     dev: true
+
+  /shallow-equal@1.2.1:
+    resolution: {integrity: sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==}
+    dev: false
 
   /shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -1892,10 +1874,6 @@ packages:
       any-promise: 1.3.0
     dev: true
 
-  /tiny-invariant@1.3.1:
-    resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
-    dev: false
-
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
@@ -1928,14 +1906,6 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
     dev: true
-
-  /use-memo-one@1.1.3(react@18.2.0):
-    resolution: {integrity: sha512-g66/K7ZQGYrI6dy8GLpVcMsBp4s17xNkYJVSMvTEevGy3nDxHOfE6z8BVE22+5G5x7t3+bhzrlTDB7ObrEE0cQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
-    dev: false
 
   /use-sync-external-store@1.2.0(react@18.2.0):
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
