@@ -3,17 +3,36 @@ import { useParams } from "react-router-dom";
 import { Listing } from "../types";
 import { facilities } from "../utils/data";
 
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+
 const ListingDetailPage = () => {
   const { id: listingId } = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listingDetails, setListingDetails] = useState<Listing>(null);
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  // handle date select
+  const handleDateSelect = (ranges: any) => {
+    setDateRange([ranges.selection]);
+  };
+
+  const startDate = new Date(dateRange[0].startDate);
+  const endDate = new Date(dateRange[0].endDate);
+  const count = Math.round(endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
 
   const fetchListingDetails = async () => {
     try {
       setIsLoading(true);
       const response = await fetch("http://localhost:5000/api/listings/" + listingId);
       const { data } = await response.json();
-      console.log(data);
       setListingDetails(data);
     } catch (error) {
       console.log(error.message);
@@ -28,8 +47,12 @@ const ListingDetailPage = () => {
 
   return (
     <>
-      {isLoading && <div className="text-3xl mt-20">Loading...</div>}
-      <main className="px-3 md:container mx-auto pt-20">
+      {isLoading && (
+        <div className="flex justify-center mt-20">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      )}
+      <main className="px-3 md:container mx-auto pt-20 pb-20">
         <h1 className="text-2xl font-semibold">{listingDetails?.title}</h1>
         {/* images */}
         <div className="flex flex-wrap gap-5 w-full py-5">
@@ -44,9 +67,10 @@ const ListingDetailPage = () => {
             );
           })}
         </div>
-        {/* Address */}
+        {/* Address and accomodation*/}
         <p className="text-lg font-semibold pt-5">
-          {listingDetails?.apartmentSuite}, {listingDetails?.city}, {listingDetails?.country}
+          An {listingDetails?.accomodation} in {listingDetails?.apartmentSuite},{" "}
+          {listingDetails?.city}, {listingDetails?.country}
         </p>
         {/* guests info */}
         <div className="flex gap-5 flex-wrap pt-5">
@@ -71,30 +95,65 @@ const ListingDetailPage = () => {
         </div>
         <div className="divider"></div>
         {/* Description */}
-        <h1 className="font-semibold">Description</h1>
+        <h1 className="text-xl font-normal">Description</h1>
         <p className="text-gray-700 pt-5">{listingDetails?.description}</p>
         <div className="divider"></div>
         {/* highlights */}
-        <h1 className="font-semibold">Highlights</h1>
+        <h1 className="font-semibold text-xl">Highlights</h1>
         <p className="text-gray-700 pt-5">{listingDetails?.highlight}</p>
         <div className="divider"></div>
-        <h1 className="font-semibold text-lg">What this place has to offer </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 place-items-start gap-5 py-5">
-          {listingDetails?.facilities.map((item) => {
-            const facility = facilities.find((f) => f.value === item);
-            const { value, icon: Icon } = facility;
-            if (facility) {
-              return (
-                <div
-                  key={value}
-                  className="flex gap-5 rounded-md border border-primary shadow-md p-3">
-                  <Icon className="text-primary" />
-                  <p>{value}</p>
-                </div>
-              );
-            }
-            return null;
-          })}
+        <div className="grid grid-cols-1 sm:grid-cols-2  place-items-start gap-5 pb-10">
+          <div>
+            <h1 className="font-normal text-xl">What this place has to offer </h1>
+            {/* Facilities provided */}
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 place-items-start gap-5 pt-10">
+              {listingDetails?.facilities.map((item) => {
+                const facility = facilities.find((f) => f.value === item);
+                const { name, icon: Icon } = facility;
+                if (facility) {
+                  return (
+                    <div
+                      key={name}
+                      className="flex gap-5 rounded-md border border-primary shadow-md p-3">
+                      <Icon className="text-primary" />
+                      <p>{name}</p>
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </div>
+          </div>
+          {/* Calendar */}
+          <div>
+            <h1 className="text-xl font-normal">How long do you want to stay ? </h1>
+            <DateRange ranges={dateRange} onChange={handleDateSelect} className="mt-4" />
+          </div>
+        </div>
+        <div className="divider"></div>
+        {/* Price Calculations */}
+        <div className="space-y-3">
+          <h1 className="font-semibold text-xl">See what's your Itenary looks like </h1>
+          <div className="p-3 rounded-md shadow-md shadow-primary">
+            <div className="flex flex-wrap items-center justify-around flex-col sm:flex-row">
+              <h2 className="text-xl font-semibold text-primary-content">
+                {count > 1
+                  ? `₹${listingDetails?.price} x ${count} nights`
+                  : `₹${listingDetails?.price} x ${count} night`}
+              </h2>
+              <h2 className="text-gray-600">
+                {" "}
+                Start Date : {dateRange[0].startDate.toDateString()}
+              </h2>
+              <h2 className="text-gray-600"> End Date : {dateRange[0].endDate.toDateString()}</h2>
+            </div>
+          </div>
+          <div className="flex flex-col gap-5 sm:flex-row items-center justify-between pt-5">
+            <p className="text-2xl font-semibold text-primary border p-2 rounded-md border-primary ">
+              Total Price : ₹{listingDetails?.price * count}
+            </p>
+            <button className="btn btn-primary btn-lg btn-wide">BOOK NOW</button>
+          </div>
         </div>
       </main>
     </>

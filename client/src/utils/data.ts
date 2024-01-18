@@ -171,7 +171,7 @@ export const placeTypes = [
     icon: Home,
   },
   {
-    name: "Separate Room(s)",
+    name: "Separate Rooms",
     value: "rooms",
     description: "Guests have their own room in a house, plus access to shared places",
     icon: DoorClosed,
