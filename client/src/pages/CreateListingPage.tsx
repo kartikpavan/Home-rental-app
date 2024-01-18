@@ -584,11 +584,11 @@ const CreateListingPage = () => {
                      </div>
                   </article>
                </section>
-               <div className="w-full flex justify-center mb-20">
+               <div className="w-full flex justify-center pb-20 pt-10">
                   <button
                      disabled={isSubmitting}
                      type="submit"
-                     className="btn btn-primary btn-wide btn-lg">
+                     className="btn btn-primary max-w-md w-full btn-lg">
                      {isSubmitting && <span className="loading loading-spinner loading-md"></span>}
                      PUBLISH
                   </button>

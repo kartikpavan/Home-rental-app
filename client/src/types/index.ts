@@ -57,6 +57,7 @@ export type CreateListingFormData = {
 };
 
 export type Listing = {
+   _id: string;
    categories: string[];
    accomodation: string;
    price: number;

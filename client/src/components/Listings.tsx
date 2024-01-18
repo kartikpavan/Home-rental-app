@@ -36,7 +36,6 @@ const Listings = () => {
 
    return (
       <>
-         {isLoading && <p className="text-4xl font-bold">Loading...</p>}
          <div className="py-5">
             <h1 className="text-3xl font-bold text-primary-content text-center my-10 ">
                All Property Listings
@@ -54,9 +53,25 @@ const Listings = () => {
                   );
                })}
             </section>
-            {listings.map((listing) => {
-               return <ListingCard listing={listing} />;
-            })}
+            {isLoading ? (
+               <p className="text-4xl font-bold">Loading...</p>
+            ) : (
+               <section className="px-3 md:container mx-auto pt-10 pb-20 flex gap-x-10 gap-y-20 flex-wrap justify-center">
+                  {listings.map((listing) => {
+                     return (
+                        <ListingCard
+                           key={listing._id}
+                           listingId={listing._id}
+                           title={listing.title}
+                           categories={listing.categories}
+                           images={listing.images}
+                           price={listing.price}
+                           accomodation={listing.accomodation}
+                        />
+                     );
+                  })}
+               </section>
+            )}
          </div>
       </>
    );
