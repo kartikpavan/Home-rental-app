@@ -5,8 +5,11 @@ import RegisterPage from "./pages/RegisterPage";
 import Navbar from "./components/shared/Navbar";
 import CreateListingPage from "./pages/CreateListingPage";
 import ListingDetailPage from "./pages/ListingDetailPage";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 
 const App = () => {
+   const { token } = useSelector((store: RootState) => store.user);
    return (
       <>
          <Navbar />
@@ -14,9 +17,11 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/create-listing" element={<CreateListingPage />} />
+            <Route
+               path="/create-listing"
+               element={!token ? <LoginPage /> : <CreateListingPage />}
+            />
             <Route path="/listing/:id" element={<ListingDetailPage />} />
-
             <Route
                path="/auth/*"
                element={<h1 className="pt-40">This route does not exist yet</h1>}
