@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { setWishList } from "../../redux/userSlice";
+import { API_URL } from "../../api/apiClient";
 
 type Props = {
   listingId: string;
@@ -38,7 +39,7 @@ const ListingCard = ({ listingId, title, accomodation, price, images, categories
 
   const handleAddToWishList = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/user/${user.user._id}/${listingId}`, {
+      const response = await fetch(`${API_URL}/api/user/${user.user._id}/${listingId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import { setTripList } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { Link } from "react-router-dom";
+import { API_URL } from "../api/apiClient";
 
 const MyTripsPage = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const MyTripsPage = () => {
   const fetchTrips = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/user/${user?._id}/trips`);
+      const response = await fetch(`${API_URL}/api/user/${user?._id}/trips`);
       const { data } = await response.json();
       dispatch(setTripList(data));
       console.log(data);

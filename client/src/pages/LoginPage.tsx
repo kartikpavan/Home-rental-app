@@ -5,6 +5,7 @@ import { LoginFormData } from "../types";
 import { setLogin } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
+import { API_URL } from "../api/apiClient";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<LoginFormData> = async (formData) => {
     try {
       setIsSubmitting(true);
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -4,6 +4,7 @@ import { RootState } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { setListing } from "../redux/userSlice";
 import ListingCard from "../components/shared/ListingCard";
+import { API_URL } from "../api/apiClient";
 
 const MyListingsPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -14,7 +15,7 @@ const MyListingsPage = () => {
   const fetchListings = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/user/${user?._id}/listings`);
+      const response = await fetch(`${API_URL}/api/user/${user?._id}/listings`);
       const { data } = await response.json();
       dispatch(setListing(data));
     } catch (error) {

@@ -1,13 +1,5 @@
-const BASE_URL = "http://localhost:5000/api";
+export const DEV_URL = "http://localhost:5000" as const;
 
-export async function registerUser(formData: any) {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/register`, {
-      method: "POST",
-      body: formData,
-    });
-    return response.json();
-  } catch (error) {
-    throw error;
-  }
-}
+export const PROD_URL = "production-endpoint" as const;
+
+export const API_URL = import.meta.env.MODE === "development" ? DEV_URL : PROD_URL;

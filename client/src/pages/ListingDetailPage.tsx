@@ -9,6 +9,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { API_URL } from "../api/apiClient";
 
 const ListingDetailPage = () => {
   const { id: listingId } = useParams();
@@ -38,7 +39,7 @@ const ListingDetailPage = () => {
   const fetchListingDetails = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:5000/api/listings/" + listingId);
+      const response = await fetch(`${API_URL}/api/listings/` + listingId);
       const { data } = await response.json();
       setListingDetails(data);
     } catch (error) {
@@ -59,7 +60,7 @@ const ListingDetailPage = () => {
     };
     try {
       setIsSubmitting(true);
-      const response = await fetch("http://localhost:5000/api/booking/create-booking", {
+      const response = await fetch(`${API_URL}/api/booking/create-booking`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -3,6 +3,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterFormData } from "../types";
 import toast, { Toaster } from "react-hot-toast";
+import { API_URL } from "../api/apiClient";
+
+console.log(API_URL);
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -32,7 +35,7 @@ const RegisterPage = () => {
       formData.append("email", data.email);
       formData.append("password", data.password);
       formData.append("profilePic", data.profilePic[0]);
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         body: formData,
       });
@@ -40,10 +43,6 @@ const RegisterPage = () => {
         console.log("Registered successfully!");
         navigate("/login", { replace: true });
         toast.success("Registered successfully, Please Login again..");
-      } else {
-        const errorMessage = await response.json();
-        console.error("Registration Failed " + errorMessage.message);
-        toast.error("Registeration Failed, Check Console");
       }
     } catch (error) {
       console.log("Registeration Failed " + error.message);

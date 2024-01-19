@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../api/apiClient";
 
 const CreateListingPage = () => {
   const navigate = useNavigate();
@@ -126,7 +127,7 @@ const CreateListingPage = () => {
       });
 
       // sending POST request to the server
-      const response = await fetch("http://localhost:5000/api/listings/create-listing", {
+      const response = await fetch(`${API_URL}/api/listings/create-listing`, {
         method: "POST",
         body: listingFormData,
       });
