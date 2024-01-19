@@ -21,7 +21,6 @@ const Listings = () => {
                : "http://localhost:5000/api/listings"
          );
          const { data } = await response.json();
-         console.log(data);
          dispatch(setListing(data));
       } catch (error) {
          console.log(error);

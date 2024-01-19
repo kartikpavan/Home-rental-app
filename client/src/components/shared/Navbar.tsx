@@ -38,17 +38,19 @@ const Navbar = () => {
           </Link>
           {user ? (
             <div className="border p-1 rounded-full flex items-center gap-3 flex-row-reverse hover:shadow-md">
-              <div className="dropdown dropdown-end">
+              <div className="dropdown dropdown-end bg-white z-50 ">
                 <div tabIndex={0} role="button" className="m-1">
                   <Menu />
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow-md bg-base-100 rounded-md w-52 mt-4 ">
+                  className="dropdown-content z-50 menu p-2 shadow-md bg-base-100 rounded-md w-52 mt-4 ">
                   {NavMenuItems.map((item) => {
                     let pathName = item.href.split("/")[1];
                     if (pathName === "trips") {
                       item.href = `/${user._id}/trips`;
+                    } else if (pathName === "wishlist") {
+                      item.href = `/${user._id}/wishlist`;
                     }
                     return (
                       <Link
