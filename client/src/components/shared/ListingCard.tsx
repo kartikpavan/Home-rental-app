@@ -20,6 +20,7 @@ const ListingCard = ({ listingId, title, accomodation, price, images, categories
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const user = useSelector((store: RootState) => store.user);
   const dispatch = useDispatch();
+
   const handleLeftClick = (idx: number) => {
     if (idx === 0) {
       setCurrentIndex(images.length - 1);
@@ -53,7 +54,7 @@ const ListingCard = ({ listingId, title, accomodation, price, images, categories
   };
 
   return (
-    <div className=" max-w-80 w-full h-64">
+    <div className="max-w-80 w-full h-64">
       {/* image */}
       <div className="w-full h-3/4 relative ">
         <button
