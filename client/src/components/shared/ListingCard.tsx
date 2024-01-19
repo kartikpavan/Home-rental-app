@@ -82,11 +82,11 @@ const ListingCard = ({ listingId, title, accomodation, price, images, categories
       </div>
       {/* other info */}
       <div className="rounded-md rounded-t-none shadow-md border border-t-0 p-2 space-y-2 bg-white">
-        <Link to={`/listing/${listingId}`}>
+        <Link to={`/listing/${listingId}`} className="space-y-2">
           <h1 className="font-bold">{title}</h1>
           <div className="flex flex-wrap gap-1">
             {categories.map((category) => (
-              <p key={category} className="border rounded-full p-1 text-xs text-primary">
+              <p key={category} className="border p-1 text-xs text-primary">
                 {category}
               </p>
             ))}

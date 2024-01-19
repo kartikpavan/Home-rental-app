@@ -46,7 +46,7 @@ const MyListingsPage = () => {
                 You have no listings
               </p>
             ) : (
-              <section className="px-3 md:container mx-auto pt-10 pb-20 flex gap-x-10 gap-y-20 flex-wrap ">
+              <section className="pt-10 pb-20 flex gap-x-10 gap-y-20 flex-wrap ">
                 {user?.myProperties?.map((item) => {
                   return (
                     <ListingCard

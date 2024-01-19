@@ -46,32 +46,39 @@ const MyTripsPage = () => {
                 You have no trips
               </p>
             )}
-            <section className="w-full py-5 flex gap-5 flex-wrap">
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-10 pb-20">
               {user?.myTrips &&
                 user?.myTrips?.map((trip) => {
                   const { accomodation, name, startDate, endDate, price, listingId } = trip;
                   return (
                     <Link
                       to={`/listing/${listingId}`}
-                      className="max-w-lg w-full mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-                      <div className="md:flex items-center justify-center">
-                        <div className="md:flex-shrink-0">
-                          {trip?.images?.length > 0 && (
-                            <img
-                              className="h-48 rounded-md w-full object-cover md:w-48"
-                              src={trip?.images[0]?.url}
-                              alt={""}
-                            />
-                          )}
+                      className="flex flex-col rounded-lg shadow-md overflow-hidden h-full">
+                      <div className="relative">
+                        {trip?.images?.length > 0 && (
+                          <img
+                            className="w-full h-56 object-cover"
+                            src={trip?.images[0]?.url}
+                            alt={""}
+                          />
+                        )}
+                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gray-800 bg-opacity-75 text-white">
+                          <h1 className="uppercase font-semibold text-lg">{accomodation}</h1>
+                          <h2 className="text-xl font-bold mt-2">{name}</h2>
                         </div>
-                        <div className="p-8">
-                          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                            {accomodation}
-                          </div>
-                          <h2 className="mt-2 text-xl leading-7 font-bold text-gray-900">{name}</h2>
-                          <p className="mt-2 text-gray-500">Start Date: {startDate}</p>
-                          <p className="mt-2 text-gray-500">End Date: {endDate}</p>
-                          <p className="mt-2 text-lg text-primary">Total Price: ₹{price}</p>
+                      </div>
+                      <div className="p-4">
+                        <div className="flex justify-between">
+                          <p className="text-gray-500">Start Date: </p>
+                          <p>{startDate}</p>
+                        </div>
+                        <div className="flex justify-between">
+                          <p className="text-gray-500">End Date: </p>
+                          <p>{endDate}</p>
+                        </div>
+                        <div className="mt-4 flex justify-between">
+                          <p className="text-primary">Total Price: </p>
+                          <p className="text-primary font-semibold">₹{price}</p>
                         </div>
                       </div>
                     </Link>
