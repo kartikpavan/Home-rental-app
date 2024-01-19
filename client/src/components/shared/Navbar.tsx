@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { CircleUserRound, Menu, Search, User } from "lucide-react";
+import { CircleUserRound, Menu, Search } from "lucide-react";
 import { RootState, presistor } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { NavMenuItems } from "../../utils/data";

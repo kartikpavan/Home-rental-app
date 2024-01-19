@@ -136,11 +136,11 @@ const CreateListingPage = () => {
         toast.success("Listing created successfully");
       } else {
         const errorMessage = await response.json();
-        console.error("Listing Creation Failed " + errorMessage.message);
+        console.log("Listing Creation Failed " + errorMessage.message);
         toast.error("Listing Creation Failed, check console");
       }
     } catch (error) {
-      console.error("Listing Creation Failed " + error.message);
+      console.log("Listing Creation Failed " + error.message);
       toast.error("Listing Creation Failed");
     } finally {
       setIsSubmitting(false);

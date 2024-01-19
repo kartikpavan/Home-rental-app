@@ -64,8 +64,8 @@ const Listings = () => {
           </div>
         ) : (
           <section className="px-3 md:container mx-auto pt-10 pb-20 flex gap-x-10 gap-y-20 flex-wrap justify-center">
-            {listings.length > 0 ? (
-              listings.map((listing) => {
+            {listings?.length > 0 ? (
+              listings?.map((listing) => {
                 return (
                   <ListingCard
                     key={listing._id}
