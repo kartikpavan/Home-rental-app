@@ -7,6 +7,10 @@ const ListingSchema = new Schema(
       ref: "User",
       required: true,
     },
+    accomodation: {
+      type: String,
+      required: true,
+    },
     categories: {
       type: [String],
       required: true,
@@ -67,10 +71,7 @@ const ListingSchema = new Schema(
       type: String,
       required: true,
     },
-    accomodation: {
-      type: String,
-      required: true,
-    },
+
     images: [
       {
         url: {

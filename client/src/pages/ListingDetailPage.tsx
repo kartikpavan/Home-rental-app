@@ -106,8 +106,8 @@ const ListingDetailPage = () => {
         </div>
         {/* Address and accomodation*/}
         <p className="text-lg font-semibold pt-5">
-          An {listingDetails?.accomodation} in {listingDetails?.apartmentSuite},{" "}
-          {listingDetails?.city}, {listingDetails?.country}
+          {listingDetails?.accomodation} in {listingDetails?.apartmentSuite},{" "}
+          {listingDetails?.streetAddress} ,{listingDetails?.city}, {listingDetails?.country}
         </p>
         {/* guests info */}
         <div className="flex gap-5 flex-wrap pt-5">

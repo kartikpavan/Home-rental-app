@@ -51,6 +51,8 @@ const Navbar = () => {
                       item.href = `/${user._id}/trips`;
                     } else if (pathName === "wishlist") {
                       item.href = `/${user._id}/wishlist`;
+                    } else if (pathName === "listings") {
+                      item.href = `/${user._id}/listings`;
                     }
                     return (
                       <Link

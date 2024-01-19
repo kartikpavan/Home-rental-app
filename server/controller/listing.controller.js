@@ -13,6 +13,7 @@ export async function createListingController(req, res) {
     const {
       author,
       categories,
+      accomodation,
       price,
       title,
       highlight,
@@ -33,6 +34,7 @@ export async function createListingController(req, res) {
     const newListing = await Listing.create({
       author,
       categories,
+      accomodation,
       price,
       title,
       highlight,

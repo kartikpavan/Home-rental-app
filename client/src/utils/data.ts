@@ -56,10 +56,7 @@ export const NavMenuItems = [
     label: "Property List",
     href: "/listings",
   },
-  {
-    label: "Reservation List",
-    href: "/reservations",
-  },
+
   {
     label: "Become a Host",
     href: "/create-listing",

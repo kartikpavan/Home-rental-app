@@ -96,7 +96,6 @@ const CreateListingPage = () => {
   };
 
   const onSubmit: SubmitHandler<CreateListingFormData> = async (data) => {
-    console.log(data);
     try {
       setIsSubmitting(true);
       const listingFormData = new FormData();
