@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Listing } from "../types";
 import { facilities } from "../utils/data";
+import toast, { Toaster } from "react-hot-toast";
 
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const ListingDetailPage = () => {
   const { id: listingId } = useParams();
+  const navigate = useNavigate();
+  const { user } = useSelector((store: RootState) => store.user);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
   const [listingDetails, setListingDetails] = useState<Listing>(null);
   const [dateRange, setDateRange] = useState([
     {
@@ -41,12 +48,42 @@ const ListingDetailPage = () => {
     }
   };
 
+  const handleBooking = async () => {
+    const formData = {
+      customerId: user?._id,
+      listingId: listingId,
+      hostId: listingDetails?.author._id,
+      startDate: dateRange[0].startDate.toDateString(),
+      endDate: dateRange[0].endDate.toDateString(),
+      totalPrice: listingDetails?.price * count,
+    };
+    try {
+      setIsSubmitting(true);
+      const response = await fetch("http://localhost:5000/api/booking/create-booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        toast.success("Booking successful");
+        navigate(`/${user?._id}/trips`);
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Could not book : Check console");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchListingDetails();
   }, [listingId]);
 
   return (
     <>
+      <Toaster />
       {isLoading && (
         <div className="flex justify-center mt-20">
           <span className="loading loading-spinner loading-lg"></span>
@@ -95,7 +132,7 @@ const ListingDetailPage = () => {
         </div>
         <div className="divider"></div>
         {/* Description */}
-        <h1 className="text-xl font-normal">Description</h1>
+        <h1 className="text-xl font-semibold">Description</h1>
         <p className="text-gray-700 pt-5">{listingDetails?.description}</p>
         <div className="divider"></div>
         {/* highlights */}
@@ -104,7 +141,7 @@ const ListingDetailPage = () => {
         <div className="divider"></div>
         <div className="grid grid-cols-1 sm:grid-cols-2  place-items-start gap-5 pb-10">
           <div>
-            <h1 className="font-normal text-xl">What this place has to offer </h1>
+            <h1 className="font-semibold text-xl">What this place has to offer </h1>
             {/* Facilities provided */}
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 place-items-start gap-5 pt-10">
               {listingDetails?.facilities.map((item) => {
@@ -126,7 +163,7 @@ const ListingDetailPage = () => {
           </div>
           {/* Calendar */}
           <div>
-            <h1 className="text-xl font-normal">How long do you want to stay ? </h1>
+            <h1 className="text-xl font-semibold">How long do you want to stay ? </h1>
             <DateRange ranges={dateRange} onChange={handleDateSelect} className="mt-4" />
           </div>
         </div>
@@ -152,7 +189,14 @@ const ListingDetailPage = () => {
             <p className="text-2xl font-semibold text-primary border p-2 rounded-md border-primary ">
               Total Price : ₹{listingDetails?.price * count}
             </p>
-            <button className="btn btn-primary btn-lg btn-wide">BOOK NOW</button>
+            <button
+              onClick={handleBooking}
+              disabled={isSubmitting}
+              type="submit"
+              className="btn btn-primary btn-lg btn-wide">
+              {isSubmitting && <span className="loading loading-spinner loading-md"></span>}
+              BOOK NOW
+            </button>
           </div>
         </div>
       </main>

@@ -46,6 +46,10 @@ const Navbar = () => {
                   tabIndex={0}
                   className="dropdown-content z-[1] menu p-2 shadow-md bg-base-100 rounded-md w-52 mt-4 ">
                   {NavMenuItems.map((item) => {
+                    let pathName = item.href.split("/")[1];
+                    if (pathName === "trips") {
+                      item.href = `/${user._id}/trips`;
+                    }
                     return (
                       <Link
                         to={item.href}
