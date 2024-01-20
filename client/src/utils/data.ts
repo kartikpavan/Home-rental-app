@@ -46,20 +46,20 @@ import {
 export const NavMenuItems = [
   {
     label: "Trip List",
-    href: "/trips",
+    href: "trips",
   },
   {
     label: "Wish List",
-    href: "/wishlist",
+    href: "wishlist",
   },
   {
     label: "Property List",
-    href: "/listings",
+    href: "listings",
   },
 
   {
     label: "Become a Host",
-    href: "/create-listing",
+    href: "create-listing",
   },
 ];
 

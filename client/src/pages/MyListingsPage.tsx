@@ -49,6 +49,7 @@ const MyListingsPage = () => {
                 {user?.myProperties?.map((item) => {
                   return (
                     <ListingCard
+                      key={item._id}
                       categories={item.categories}
                       listingId={item._id}
                       title={item.title}

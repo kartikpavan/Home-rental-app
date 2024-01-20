@@ -46,12 +46,11 @@ const Navbar = () => {
                   tabIndex={0}
                   className="dropdown-content z-50 menu p-2 shadow-md bg-base-100 rounded-md w-52 mt-4 ">
                   {NavMenuItems.map((item) => {
-                    let pathName = item.href.split("/")[1];
-                    if (pathName === "trips") {
+                    if (item.href === "trips") {
                       item.href = `/${user._id}/trips`;
-                    } else if (pathName === "wishlist") {
+                    } else if (item.href === "wishlist") {
                       item.href = `/${user._id}/wishlist`;
-                    } else if (pathName === "listings") {
+                    } else if (item.href === "listings") {
                       item.href = `/${user._id}/listings`;
                     }
                     return (
