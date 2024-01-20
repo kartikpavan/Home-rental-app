@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import ListingCard from "./shared/ListingCard";
 import { API_URL } from "../api/apiClient";
+import CardSkeleton from "./shared/CardSkeleton";
 
 const Listings = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Listings = () => {
       const { data } = await response.json();
       dispatch(setListing(data));
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -59,9 +60,7 @@ const Listings = () => {
           })}
         </section>
         {isLoading ? (
-          <div className="flex justify-center w-full items-center">
-            <span className="loading loading-spinner loading-lg"></span>
-          </div>
+          <CardSkeleton />
         ) : (
           <section className="px-3 md:container mx-auto pt-10 pb-20 flex gap-x-10 gap-y-20 flex-wrap justify-center">
             {listings?.length > 0 ? (

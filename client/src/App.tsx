@@ -10,6 +10,7 @@ import { RootState } from "./redux/store";
 import MyTripsPage from "./pages/MyTripsPage";
 import MyWishListPage from "./pages/MyWishListPage";
 import MyListingsPage from "./pages/MyListingsPage";
+import CategoryPage from "./pages/CategoryPage";
 
 const App = () => {
   const { token } = useSelector((store: RootState) => store.user);
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/create-listing" element={!token ? <LoginPage /> : <CreateListingPage />} />
         <Route path="/listing/:id" element={<ListingDetailPage />} />
+        <Route path="/listing/categories/:category" element={<CategoryPage />} />
         <Route path="/:userId/trips" element={!token ? <LoginPage /> : <MyTripsPage />} />
         <Route path="/:userId/wishlist" element={!token ? <LoginPage /> : <MyWishListPage />} />
         <Route path="/:userId/listings" element={!token ? <LoginPage /> : <MyListingsPage />} />

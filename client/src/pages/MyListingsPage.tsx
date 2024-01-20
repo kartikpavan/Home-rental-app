@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setListing } from "../redux/userSlice";
 import ListingCard from "../components/shared/ListingCard";
 import { API_URL } from "../api/apiClient";
+import CardSkeleton from "../components/shared/CardSkeleton";
 
 const MyListingsPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,9 +35,7 @@ const MyListingsPage = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex justify-center pt-20">
-          <span className="loading loading-spinner loading-lg"></span>
-        </div>
+        <CardSkeleton />
       ) : (
         <main className="main-bg w-full h-screen">
           <section className="px-3 md:container mx-auto pt-20 pb-20 ">

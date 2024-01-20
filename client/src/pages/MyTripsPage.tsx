@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { Link } from "react-router-dom";
 import { API_URL } from "../api/apiClient";
+import CardSkeleton from "../components/shared/CardSkeleton";
 
 const MyTripsPage = () => {
   const dispatch = useDispatch();
@@ -34,9 +35,7 @@ const MyTripsPage = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex justify-center pt-20">
-          <span className="loading loading-spinner loading-lg"></span>
-        </div>
+        <CardSkeleton />
       ) : (
         <main className="main-bg w-full h-screen">
           <section className="px-3 md:container mx-auto pt-20 pb-20 ">
