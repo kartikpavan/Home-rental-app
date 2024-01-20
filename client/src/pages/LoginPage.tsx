@@ -13,11 +13,11 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     setError,
     formState: { errors },
   } = useForm<LoginFormData>();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [testLoader, setTestLoader] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<LoginFormData> = async (formData) => {
     try {
@@ -46,10 +46,47 @@ const LoginPage = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log("Registeration Failed " + error.message);
+      console.log("LOGIN Failed " + error.message);
       toast.error("Login Failed");
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleGuestLogin = async () => {
+    try {
+      setTestLoader(true);
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: import.meta.env.VITE_TEST_USER,
+          password: import.meta.env.VITE_TEST_PASS,
+        }),
+      });
+      if (response.status === 404) {
+        setError("email", {
+          message: "User not found",
+        });
+      }
+      const loggedInUser = await response.json();
+      if (loggedInUser.message === "Invalid credentials") {
+        toast.error("Invalid Credentials");
+      } else if (loggedInUser.message === "Login successful") {
+        dispatch(
+          setLogin({
+            user: loggedInUser.data,
+            token: loggedInUser.token,
+          })
+        );
+        toast.success("Login Successful");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("LOGIN Failed " + error.message);
+      toast.error("Login Failed");
+    } finally {
+      setTestLoader(false);
     }
   };
 
@@ -101,7 +138,14 @@ const LoginPage = () => {
                 {isSubmitting && <span className="loading loading-spinner loading-md"></span>}
                 Submit
               </button>
+              <div className="divider">OR</div>
             </form>
+            <div className="flex items-center justify-center">
+              <button className="btn btn-success" disabled={testLoader} onClick={handleGuestLogin}>
+                {isSubmitting && <span className="loading loading-spinner loading-md"></span>}
+                GUEST LOGIN
+              </button>
+            </div>
           </div>
         </div>
       </div>

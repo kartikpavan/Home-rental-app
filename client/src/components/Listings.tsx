@@ -59,35 +59,37 @@ const Listings = () => {
             );
           })}
         </section>
-        {isLoading ? (
-          <CardSkeleton />
-        ) : (
-          <section className="px-3 md:container mx-auto pt-10 pb-20 flex gap-x-10 gap-y-20 flex-wrap justify-center">
-            {listings?.length > 0 ? (
-              listings?.map((listing) => {
-                return (
-                  <ListingCard
-                    key={listing._id}
-                    listingId={listing._id}
-                    title={listing.title}
-                    categories={listing.categories}
-                    images={listing.images}
-                    price={listing.price}
-                    accomodation={listing.accomodation}
-                  />
-                );
-              })
-            ) : (
-              <p className="text-center font-bold text-xl ">
-                No listings found for{" "}
-                <span className="underline italic text-primary-content/80">
-                  "{selectedCategory}"
-                </span>{" "}
-                category
-              </p>
-            )}
-          </section>
-        )}
+        <div className="pb-20">
+          {isLoading ? (
+            <CardSkeleton />
+          ) : (
+            <section className="px-3 md:container mx-auto pt-10 pb-20 flex gap-x-10 gap-y-20 flex-wrap justify-center">
+              {listings?.length > 0 ? (
+                listings?.map((listing) => {
+                  return (
+                    <ListingCard
+                      key={listing._id}
+                      listingId={listing._id}
+                      title={listing.title}
+                      categories={listing.categories}
+                      images={listing.images}
+                      price={listing.price}
+                      accomodation={listing.accomodation}
+                    />
+                  );
+                })
+              ) : (
+                <p className="text-center font-bold text-xl ">
+                  No listings found for{" "}
+                  <span className="underline italic text-primary-content/80">
+                    "{selectedCategory}"
+                  </span>{" "}
+                  category
+                </p>
+              )}
+            </section>
+          )}
+        </div>
       </div>
     </>
   );
