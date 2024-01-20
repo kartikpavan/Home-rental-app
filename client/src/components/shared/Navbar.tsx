@@ -3,16 +3,32 @@ import { CircleUserRound, Menu, Search } from "lucide-react";
 import { RootState, presistor } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { NavMenuItems } from "../../utils/data";
+import { useState } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((store: RootState) => store.user);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const handleSearchAction = (
+    e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<SVGElement, MouseEvent>
+  ) => {
+    if (searchTerm.trim() === "") return;
+    if (
+      (e as React.KeyboardEvent<HTMLInputElement>).key === "Enter" ||
+      (e as React.MouseEvent<SVGElement, MouseEvent>).type === "click"
+    ) {
+      navigate(`/listing/search/${searchTerm}`);
+      setSearchTerm("");
+    }
+  };
 
   // LOGOUT USER and clear the redux persist state
   const handleLogout = () => {
     presistor.purge();
     navigate("/login");
   };
+
   return (
     <nav className="w-full shadow-md fixed bg-white z-10">
       {/* logo */}
@@ -21,21 +37,32 @@ const Navbar = () => {
           Dream <span className="text-primary font-bold">HARBOR</span>
         </Link>
         {/* Search Bar */}
-        <div className="relative hidden md:flex ">
-          <Search className="absolute top-[50%] left-2 -translate-y-[50%] text-gray-400 " />
+        <div className="relative hidden md:flex">
+          <Search
+            className="absolute top-[50%] left-2 -translate-y-[50%] text-gray-400 cursor-pointer"
+            onClick={handleSearchAction}
+          />
           <input
-            type="text"
+            id="searchInput"
+            value={searchTerm}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+            onKeyDown={handleSearchAction}
+            type="Search ..."
             className="input input-bordered input-sm w-80 pl-10 rounded-md"
             placeholder="Search..."
           />
         </div>
         {/* Pofile Pic */}
         <div className="flex gap-3 items-center">
-          <Link
-            to={`${user ? "/create-listing" : "/login"}`}
+          <div
+            // to={`${user ? "/create-listing" : "/login"}`}
             className="text-primary font-semibold hidden md:flex">
-            Become a Host
-          </Link>
+            {user && (
+              <h1>
+                Welcome <span className="text-error">{user.firstName}</span>
+              </h1>
+            )}
+          </div>
           {user ? (
             <div className="border p-1 rounded-full flex items-center gap-3 flex-row-reverse hover:shadow-md">
               <div className="dropdown dropdown-end bg-white z-50 ">
@@ -71,7 +98,7 @@ const Navbar = () => {
               <img
                 src={user.profileImage?.url}
                 alt="ProfilePic"
-                className="object-contai   n w-8 h-8 rounded-full hover:cursor-pointer"
+                className="object-contain w-8 h-8 rounded-full hover:cursor-pointer"
               />
             </div>
           ) : (

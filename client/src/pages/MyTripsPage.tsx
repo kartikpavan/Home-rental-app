@@ -18,7 +18,6 @@ const MyTripsPage = () => {
       const response = await fetch(`${API_URL}/api/user/${user?._id}/trips`);
       const { data } = await response.json();
       dispatch(setTripList(data));
-      console.log(data);
     } catch (error) {
       console.log(error.message);
     } finally {

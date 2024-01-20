@@ -102,3 +102,28 @@ export async function getListingByIdController(req, res) {
     res.status(404).json({ message: "Failed to fetch listing " + error.message });
   }
 }
+
+export async function getSearchResultsController(req, res) {
+  const { searchQuery } = req.params;
+  try {
+    let listings = [];
+    if (searchQuery) {
+      listings = await Listing.find({
+        $or: [
+          { city: { $regex: new RegExp(searchQuery, "i") } },
+          { title: { $regex: new RegExp(searchQuery, "i") } },
+          { description: { $regex: new RegExp(searchQuery, "i") } },
+          { apartmentSuite: { $regex: new RegExp(searchQuery, "i") } },
+          { country: { $regex: new RegExp(searchQuery, "i") } },
+          { pinCode: { $regex: new RegExp(searchQuery, "i") } },
+          { streetAddress: { $regex: new RegExp(searchQuery, "i") } },
+          { categories: { $regex: new RegExp(searchQuery, "i") } },
+        ],
+      });
+    }
+
+    return res.status(200).json({ data: listings });
+  } catch (error) {
+    res.status(404).json({ message: "Failed to fetch listing " + error.message });
+  }
+}
