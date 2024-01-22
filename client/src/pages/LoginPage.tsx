@@ -19,19 +19,32 @@ const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [testLoader, setTestLoader] = useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<LoginFormData> = async (formData) => {
+  const handleLogin = async (formData: LoginFormData | null, isGuestLogin: boolean = false) => {
     try {
       setIsSubmitting(true);
+      if (isGuestLogin) {
+        setTestLoader(true);
+      }
+      // Checking for the test User login
+      const requestBody = isGuestLogin
+        ? {
+            email: import.meta.env.VITE_TEST_USER,
+            password: import.meta.env.VITE_TEST_PASS,
+          }
+        : formData;
+
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(requestBody),
       });
+
       if (response.status === 404) {
         setError("email", {
           message: "User not found",
         });
       }
+
       const loggedInUser = await response.json();
       if (loggedInUser.message === "Invalid credentials") {
         toast.error("Invalid Credentials");
@@ -50,44 +63,20 @@ const LoginPage = () => {
       toast.error("Login Failed");
     } finally {
       setIsSubmitting(false);
+      if (isGuestLogin) {
+        setTestLoader(false);
+      }
     }
   };
 
+  // Usage for regular login
+  const onSubmit: SubmitHandler<LoginFormData> = async (formData) => {
+    await handleLogin(formData);
+  };
+
+  // Usage for guest login
   const handleGuestLogin = async () => {
-    try {
-      setTestLoader(true);
-      const response = await fetch(`${API_URL}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: import.meta.env.VITE_TEST_USER,
-          password: import.meta.env.VITE_TEST_PASS,
-        }),
-      });
-      if (response.status === 404) {
-        setError("email", {
-          message: "User not found",
-        });
-      }
-      const loggedInUser = await response.json();
-      if (loggedInUser.message === "Invalid credentials") {
-        toast.error("Invalid Credentials");
-      } else if (loggedInUser.message === "Login successful") {
-        dispatch(
-          setLogin({
-            user: loggedInUser.data,
-            token: loggedInUser.token,
-          })
-        );
-        toast.success("Login Successful");
-        navigate("/");
-      }
-    } catch (error) {
-      console.log("LOGIN Failed " + error.message);
-      toast.error("Login Failed");
-    } finally {
-      setTestLoader(false);
-    }
+    await handleLogin(null, true);
   };
 
   return (
