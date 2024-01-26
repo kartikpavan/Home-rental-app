@@ -53,17 +53,24 @@ export async function addToWishListController(req, res) {
       return res.status(404).json({ message: "Listing not found" });
     }
 
-    const favoriteListing = await user.wishList.find((item) => item._id.toString() === listingId);
+    const favoriteListing = await user.wishList.find(
+      (item) => item._id.toString() === listingId
+    );
     if (favoriteListing) {
-      user.wishList = user.wishList.filter((item) => item._id.toString() !== listingId);
+      user.wishList = user.wishList.filter(
+        (item) => item._id.toString() !== listingId
+      );
       await user.save();
-      return res
-        .status(200)
-        .json({ message: "Listing removed from wishlist", data: user.wishList });
+      return res.status(200).json({
+        message: "Listing removed from wishlist",
+        data: user.wishList,
+      });
     } else {
       user.wishList.push(listing);
       await user.save();
-      return res.status(200).json({ message: "Listing added to wishlist", data: user.wishList });
+      return res
+        .status(200)
+        .json({ message: "Listing added to wishlist", data: user.wishList });
     }
   } catch (error) {
     console.log(error.message);

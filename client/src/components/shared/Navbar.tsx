@@ -11,12 +11,14 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleSearchAction = (
-    e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<SVGElement, MouseEvent>
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<SVGElement, MouseEvent>
   ) => {
     if (searchTerm.trim() === "") return;
     if (
-      (e as React.KeyboardEvent<HTMLInputElement>).key === "Enter" ||
-      (e as React.MouseEvent<SVGElement, MouseEvent>).type === "click"
+      (event as React.KeyboardEvent<HTMLInputElement>).key === "Enter" ||
+      (event as React.MouseEvent<SVGElement, MouseEvent>).type === "click"
     ) {
       navigate(`/listing/search/${searchTerm}`);
       setSearchTerm("");
@@ -45,7 +47,9 @@ const Navbar = () => {
           <input
             id="searchInput"
             value={searchTerm}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchTerm(e.target.value)
+            }
             onKeyDown={handleSearchAction}
             type="Search ..."
             className="input input-bordered input-sm w-80 pl-10 rounded-md"
